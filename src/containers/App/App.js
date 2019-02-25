@@ -1,13 +1,15 @@
 import React from 'react';
+import { Provider } from "react-redux";
 
-
+// Store
+import store from '../../store/store';
 import Router from '../../router/Router';
 
 
 const App = () => (
-  <React.Fragment>
+  <Provider store={store}>
     <Router />
-  </React.Fragment>
+  </Provider>
 );
 
 App.propTypes = {

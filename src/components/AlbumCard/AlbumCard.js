@@ -52,38 +52,40 @@ const styles = theme => ({
 
 const AlbumCard = ({ classes, album, songs }) => {
   return (
-    <Card className={classes.card}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="Recipe" className={classes.avatar}>
-            <MusicIcon />
-          </Avatar>
-        }
-        action={
-          <IconButton>
-            <MoreVertIcon />
+    album && (
+      <Card className={classes.card}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="Recipe" className={classes.avatar}>
+              <MusicIcon />
+            </Avatar>
+          }
+          action={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={album.name}
+          subheader={album.artist}
+        />
+        <CardMedia
+          className={classes.media}
+          image={album.cover}
+          title={album.name}
+        />
+        <CardContent>
+          {songs.length > 0 && <SongList songs={songs} />}
+        </CardContent>
+        {/* <CardActions className={classes.actions} disableActionSpacing>
+          <IconButton aria-label="Add to favorites">
+            <FavoriteIcon />
           </IconButton>
-        }
-        title={album.name}
-        subheader={album.artist}
-      />
-      <CardMedia
-        className={classes.media}
-        image={album.cover}
-        title={album.name}
-      />
-      <CardContent>
-        <SongList songs={songs} />
-      </CardContent>
-      {/* <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton aria-label="Add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="Share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions> */}
-    </Card>
+          <IconButton aria-label="Share">
+            <ShareIcon />
+          </IconButton>
+        </CardActions> */}
+      </Card>
+    )
   )
 }
 
