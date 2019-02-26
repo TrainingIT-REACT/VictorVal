@@ -1,5 +1,6 @@
 {
   "name": "practica_final_plantilla",
+  "author": "Víctor del Val",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,11 +17,8 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel client server",
-    "client": "react-scripts start",
-    "server": "json-server --watch server/data.json --static server/static --port 3001",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "client": "webpack-dev-server --open --mode=development",
+    "server": "json-server --watch server/data.json --static server/static --port 3001"
   },
   "eslintConfig": {
     "extends": "react-app"
