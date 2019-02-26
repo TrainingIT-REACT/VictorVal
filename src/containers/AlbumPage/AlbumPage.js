@@ -29,6 +29,12 @@ const styles = theme => ({
 
 class AlbumPage extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.handleSelectSong = this.handleSelectSong.bind(this);
+  }
+
   componentDidMount() {
     const { match, albums, addSelectedAlbum, getSongs } = this.props;
 
@@ -40,7 +46,7 @@ class AlbumPage extends Component {
     getSongs(album.id);
   }
 
-  handleSelectSong = (song) => {
+  handleSelectSong(song) {
     this.props.addSongToPlayer(song);
   }
 

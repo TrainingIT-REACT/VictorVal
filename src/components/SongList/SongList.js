@@ -27,7 +27,7 @@ const styles = theme => ({
 
 class SongList extends React.Component {
 
-  formatDuration = (secs) => {
+  formatDuration(secs) {
     var minutes = Math.floor(secs / 60);
     var seconds = secs - minutes * 60;
     return `${minutes}:${seconds}`;

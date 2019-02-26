@@ -37,18 +37,19 @@ class PlayerPage extends Component {
       selectedSong: null,
       status: '',
     }
+
+    this.handleSelectSong = this.handleSelectSong.bind(this);
+    this.handleRemoveSong = this.handleRemoveSong.bind(this);
   }
 
-  handleSelectSong = (song) => {
+  handleSelectSong(song) {
     this.setState({
       selectedSong: song,
       status: 'play',
     })
   }
 
-  handleRemoveSong = (song) => {
-    console.log("**** remove")
-    console.log(song)
+  handleRemoveSong(song) {
     this.props.removeSongFromPlayer(song);
   }
 
