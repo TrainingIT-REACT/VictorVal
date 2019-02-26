@@ -50,7 +50,7 @@ const styles = theme => ({
 });
 
 
-const AlbumCard = ({ classes, album, songs }) => {
+const AlbumCard = ({ classes, album, songs, handleSelectSong }) => {
   return (
     album && (
       <Card className={classes.card}>
@@ -74,16 +74,14 @@ const AlbumCard = ({ classes, album, songs }) => {
           title={album.name}
         />
         <CardContent>
-          {songs.length > 0 && <SongList songs={songs} />}
+          {songs.length > 0 && (
+            <SongList
+              secondaryAction="add"
+              songs={songs}
+              handleSelectSong={handleSelectSong}
+            />
+          )}
         </CardContent>
-        {/* <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-        </CardActions> */}
       </Card>
     )
   )

@@ -1,13 +1,13 @@
 import types from '../actions/types';
 
-// Estado inicial
+
 const initialState = {
   playlist: []
 }
 
-// Implementamos el reducer
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+
     case types.ADD_SONG_TO_PLAYER:
       return {
         playlist: [
@@ -15,18 +15,35 @@ const reducer = (state = initialState, action) => {
           action.song,
         ]
       };
+
     case types.REMOVE_SONG_FROM_PLAYER:
+      const newPlayList = [...state.playlist];
+      const index = newPlayList.findIndex(song => {
+        console.log("-----")
+        console.log(song.id)
+        console.log(action.song.id)
+        return song.id === action.song.id
+      });
+      console.log(">>>> reducer remove")
+      console.log(index)
+      console.log(newPlayList[index])
+      newPlayList.splice(index, 1);
       return {
-        playlist: [
-          ...state.playlist.slice(0, action.index),
-          ...state.playlist[action.index],
-          ...state.playlist.slice(action.index + 1)
-        ]
+        playlist: newPlayList
       }
+      // return {
+      //   playlist: [
+      //     ...state.playlist.slice(0, index),
+      //     ...state.playlist[index],
+      //     ...state.playlist.slice(index + 1)
+      //   ]
+      // }
+
     case types.CLEAR_SONGS_FROM_PLAYER:
       return {
         playlist: []
       }
+
     default:
       return state;
   }

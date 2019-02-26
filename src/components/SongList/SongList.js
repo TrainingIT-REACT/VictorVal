@@ -7,10 +7,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
 import MusicIcon from '@material-ui/icons/MusicNote';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   root: {
@@ -18,16 +20,12 @@ const styles = theme => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  noDecoration: {
+    textDecoration: 'none',
+  },
 });
 
 class SongList extends React.Component {
-  state = {
-    selectedIndex: null,
-  };
-
-  handleListItemClick = (event, index) => {
-    this.setState({ selectedIndex: index });
-  };
 
   formatDuration = (secs) => {
     var minutes = Math.floor(secs / 60);
@@ -36,17 +34,26 @@ class SongList extends React.Component {
   }
 
   render() {
-    const { classes, songs } = this.props;
+    const {
+      classes,
+      secondaryAction,
+      songs,
+      handleSelectSong,
+      selectedSong,
+      handleRemoveSong,
+    } = this.props;
 
     return (
       <div className={classes.root}>
         <List component="nav">
-          {songs.map((song, index) => (
-            <NavLink key={song.name} exact to="/player">
+          {songs.map(song => (
+            <NavLink key={song.name} exact to="/player" className={classes.noDecoration}>
               <ListItem
                 button
-                selected={this.state.selectedIndex === index}
-                onClick={event => this.handleListItemClick(event, index)}
+                aria-label="Add song to playlist and go to player"
+                selected={selectedSong && selectedSong.id === song.id}
+                // onClick={event => this.handleListItemClick(event, index)}
+                onClick={() => handleSelectSong(song)}
               >
                 <ListItemIcon>
                   <Avatar>
@@ -57,6 +64,24 @@ class SongList extends React.Component {
                   primary={song.name}
                   secondary={this.formatDuration(song.seconds)}
                 />
+                <ListItemSecondaryAction>
+                  {secondaryAction === 'add' && (
+                    <IconButton
+                      aria-label="Add song to player"
+                      onClick={() => handleSelectSong(song)}
+                    >
+                      <QueueMusicIcon />
+                    </IconButton>
+                  )}
+                  {secondaryAction === 'remove' && (
+                    <IconButton
+                      aria-label="Add song to player"
+                      onClick={() => handleRemoveSong(song)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  )}
+                </ListItemSecondaryAction>
               </ListItem>
             </NavLink>
           ))}

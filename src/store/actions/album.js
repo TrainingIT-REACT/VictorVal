@@ -6,11 +6,6 @@ export const addSelectedAlbum = (album) => ({
   album
 });
 
-// export const addAlbumSongs = (songs) => ({
-//   type: types.ADD_ALBUM_SONGS,
-//   songs
-// });
-
 export const clearAlbumSelection = () => ({
   type: types.CLEAR_ALBUM_SELECTION
 });

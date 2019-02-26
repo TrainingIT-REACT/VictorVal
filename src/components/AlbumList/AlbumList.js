@@ -38,9 +38,6 @@ const styles = theme => ({
   albumContent: {
     flexGrow: 1,
   },
-  noDecoration: {
-    textDecoration: 'none',
-  },
   link: {
     color: 'white',
     textDecoration: 'none',
@@ -72,11 +69,6 @@ const AlbumList = ({ classes, albums }) => {
                     {album.artist}
                   </Typography>
                 </CardContent>
-                {/* <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
-                </CardActions> */}
               </Card>
             </NavLink>
           </Grid>

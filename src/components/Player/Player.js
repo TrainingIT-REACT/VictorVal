@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,8 +11,14 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 
+import SongList from '../SongList';
+
+
 const styles = theme => ({
   card: {
+    maxWidth: 400,
+  },
+  player: {
     display: 'flex',
   },
   details: {
@@ -36,38 +43,72 @@ const styles = theme => ({
   },
 });
 
-function PlayerPage(props) {
-  const { classes, theme } = props;
+const PlayerPage = (props) => {
+  const {
+    classes,
+    theme,
+    playlist,
+    handleSelectSong,
+    selectedSong,
+    status,
+    albums,
+    handleRemoveSong,
+  } = props;
+
+  let selectedSongAlbum;
+  if (selectedSong) {
+    selectedSongAlbum = albums.find(album => album.id === selectedSong.album_id);
+  }
 
   return (
-    <Card className={classes.card}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            Live From Space
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
-          </Typography>
-        </CardContent>
-        <div className={classes.controls}>
-          <IconButton aria-label="Previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-          </IconButton>
-          <IconButton aria-label="Play/pause">
-            <PlayArrowIcon className={classes.playIcon} />
-          </IconButton>
-          <IconButton aria-label="Next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton>
+    <React.Fragment>
+      <Card className={classes.card}>
+        <div className={classes.player}>
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography component="h5" variant="h5">
+                {selectedSong ? selectedSong.name : 'Select a song to play'}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                {selectedSong ? `${selectedSongAlbum.artist} | ${selectedSongAlbum.name}` : ''}
+              </Typography>
+            </CardContent>
+            <div className={classes.controls}>
+              {selectedSong && (
+                <audio controls><source src={selectedSong.audio} /></audio>
+              )}
+              <IconButton aria-label="Previous">
+                {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+              </IconButton>
+              <IconButton aria-label="Play/pause">
+                <PlayArrowIcon className={classes.playIcon} />
+              </IconButton>
+              <IconButton aria-label="Next">
+                {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+              </IconButton>
+            </div>
+          </div>
+          <CardMedia
+            className={classes.cover}
+            image={selectedSong && selectedSongAlbum.cover}
+            title={selectedSong && selectedSongAlbum.name}
+          />
+        {/* </Card>
+        <Card> */}
         </div>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image="/static/images/cards/live-from-space.jpg"
-        title="Live from space album cover"
-      />
-    </Card>
+        <CardContent>
+          {playlist.length > 0 && (
+            <SongList
+              secondaryAction="remove"
+              songs={playlist}
+              handleSelectSong={handleSelectSong}
+              selectedSong={selectedSong}
+              handleRemoveSong={handleRemoveSong}
+            />
+          )}
+        </CardContent>
+      </Card>
+    </React.Fragment>
   );
 }
 

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter, Redirect } from 'react-router';
 
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 
 // Actions
 import { addSelectedAlbum, getSongs } from '../../store/actions/album';
+import { addSongToPlayer } from '../../store/actions/player';
 
 import { withStyles } from '@material-ui/core/styles';
 import AlbumCard from '../../components/AlbumCard';
 
-
-// Css
-// import './App.css';
 
 const styles = theme => ({
   main: {
@@ -29,75 +27,41 @@ const styles = theme => ({
   },
 });
 
-
 class AlbumPage extends Component {
-  // constructor(props) {
-  //   super(props);
 
-  //   this.state = {
-  //     loading: true,
-  //     album: [],
-  //     songs: [],
-  //   }
-  // }
-
-  async componentDidMount() {
+  componentDidMount() {
     const { match, albums, addSelectedAlbum, getSongs } = this.props;
 
-    console.log("album")
-    console.log(match)
-    console.log(albums)
+    if (albums.length === 0 ) return;
+
     const paramId = parseInt(match.params.id);
     const album = albums.find(item => item.id === paramId);
-    console.log(album)
-
-    // const album = getAlbumById(match.params.id);
     addSelectedAlbum(album);
     getSongs(album.id);
+  }
 
-    // // TODO - pass from already fetch and stored with redux
-    // // get album info
-    // try {
-    //   const res = await fetch(`/albums/${match.params.id}`);
-    //   const json = await res.json();
-    //   this.setState((prevState) => ({
-    //     ...prevState,
-    //     loading: false,
-    //     album: json
-    //   }));
-    // } catch(err) {
-    //   console.error("Error accediendo al servidor", err);
-    // }
-
-    // // TODO - store with redux
-    // // get album's songs
-    // try {
-    //   const res = await fetch(`/songs?album_id=${match.params.id}`);
-    //   const json = await res.json();
-    //   this.setState((prevState) => ({
-    //     ...prevState,
-    //     loading: false,
-    //     songs: json
-    //   }));
-    // } catch(err) {
-    //   console.error("Error accediendo al servidor", err);
-    // }
+  handleSelectSong = (song) => {
+    this.props.addSongToPlayer(song);
   }
 
   render() {
-    // const { album, songs } = this.state;
-    const { classes, selectedAlbum, songs } = this.props;
+    const { classes, albums, selectedAlbum, songs } = this.props;
+
+    if (albums.length === 0) {
+      return <Redirect to="/albums" />;
+    }
 
     return (
       <main className={classes.main}>
-        <AlbumCard album={selectedAlbum} songs={songs} />
+        <AlbumCard
+          album={selectedAlbum}
+          songs={songs}
+          handleSelectSong={this.handleSelectSong}
+        />
       </main>
     );
   }
 }
-
-// export default withRouter(withStyles(styles)(AlbumPage));
-
 
 const mapStateToProps = (state/*, otherProps */) => ({
   albums: state.albums.albums,
@@ -108,8 +72,8 @@ const mapStateToProps = (state/*, otherProps */) => ({
 const mapDispatchToProps = (dispatch) => ({
   addSelectedAlbum: album => dispatch(addSelectedAlbum(album)),
   getSongs: albumId => dispatch(getSongs(albumId)),
+  addSongToPlayer: song => dispatch(addSongToPlayer(song)),
 })
-
 
 export default compose(
   withRouter,
