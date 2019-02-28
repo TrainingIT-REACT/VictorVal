@@ -3,6 +3,9 @@
     "@babel/preset-react",
     "@babel/preset-env",
   ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+  ]
 }
 
 // babel polyfill advanced config using Browserslist's default browsers
