@@ -34,6 +34,7 @@ module.exports = {
       filename: './index.html',
     })
   ],
+  devtool: "hidden-source-map",
   devServer: {
     contentBase: './build',
     historyApiFallback: true,
