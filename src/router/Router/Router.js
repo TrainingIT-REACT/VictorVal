@@ -10,9 +10,12 @@ import Layout from '../../layout/Layout';
 
 // Page containers
 import AlbumsPage from '../../containers/AlbumsPage';
-import AlbumPage from '../../containers/AlbumPage';
-import PlayerPage from '../../containers/PlayerPage';
+// import AlbumPage from '../../containers/AlbumPage';
+// import PlayerPage from '../../containers/PlayerPage';
 import LoginPage from '../../containers/LoginPage';
+
+const AlbumPage = React.lazy(() => import('../../containers/AlbumPage'));
+const PlayerPage = React.lazy(() => import('../../containers/PlayerPage'));
 
 
 class Router extends React.Component {
@@ -36,12 +39,14 @@ class Router extends React.Component {
     return (
       <BrowserRouter>
         <Layout>
-          <Route path="/" exact component={AlbumsPage}/>
-          <Route path="/albums" exact component={AlbumsPage}/>
-          <Route path="/album/:id" exact component={AlbumPage}/>
-          <Route path="/player" exact component={PlayerPage}/>
-          <Route path="/login" exact component={LoginPage}/>
-          {/* <PrivateRoute path="/admin" component={Admin}/> */}
+          <React.Suspense fallback="Cargando...">
+            <Route path="/" exact component={AlbumsPage}/>
+            <Route path="/albums" exact component={AlbumsPage}/>
+            <Route path="/album/:id" exact component={AlbumPage}/>
+            <Route path="/player" exact component={PlayerPage}/>
+            <Route path="/login" exact component={LoginPage}/>
+            {/* <PrivateRoute path="/admin" component={Admin}/> */}
+          </React.Suspense>
         </Layout>
       </BrowserRouter>
     );
