@@ -3,6 +3,9 @@
   "author": "Víctor del Val",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": [
+    "*.css"
+  ],
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "@material-ui/core": "^3.9.2",
