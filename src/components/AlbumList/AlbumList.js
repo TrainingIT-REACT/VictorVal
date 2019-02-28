@@ -54,7 +54,7 @@ const AlbumList = ({ classes, albums }) => {
       <Grid container spacing={40}>
         {albums.map(album => (
           <Grid item key={album.id} sm={6} md={4} lg={3}>
-            <NavLink activeClassName="active" className={classes.link} exact to={`/album/${album.id}`}>
+            <NavLink activeClassName="active" className={classes.link} exact to={`/albums/${album.id}`}>
               <Card className={classes.album}>
                 <CardMedia
                   className={classes.albumMedia}

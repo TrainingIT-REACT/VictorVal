@@ -38,6 +38,7 @@ const Navbar = ({ classes }) => (
       </Typography>
       <div>
         <Button><NavLink activeClassName="active" className={classes.link} exact to="/albums">Albums</NavLink></Button>
+        <Button><NavLink activeClassName="active" className={classes.link} exact to="/player">Player</NavLink></Button>
         <Button><NavLink className={classes.link} activeClassName="active" to="/login">Login</NavLink></Button>
       </div>
     </Toolbar>

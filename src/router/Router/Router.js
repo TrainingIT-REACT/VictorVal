@@ -42,7 +42,7 @@ class Router extends React.Component {
           <React.Suspense fallback="Cargando...">
             <Route path="/" exact component={AlbumsPage}/>
             <Route path="/albums" exact component={AlbumsPage}/>
-            <Route path="/album/:id" exact component={AlbumPage}/>
+            <Route path="/albums/:id" exact component={AlbumPage}/>
             <Route path="/player" exact component={PlayerPage}/>
             <Route path="/login" exact component={LoginPage}/>
             {/* <PrivateRoute path="/admin" component={Admin}/> */}

@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open --mode=development --port 3000",
+    "build": "webpack --mode=production",
     "server": "json-server --watch server/data.json --static server/static --port 3001"
   },
   "eslintConfig": {
