@@ -5,8 +5,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const isDevel = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  entry: "./src/index.js",
-  // mode: "none",
+  entry: {
+    main: './src/index.js',
+    vendor: ['react', 'react-dom', 'react-router-dom']
+  },
+  // mode: 'none',
   // mode: isDevel ? 'development' : 'production',
   output: {
     path: path.resolve(__dirname, 'build')
@@ -16,11 +19,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "babel-loader", // with 'loader' prop we can call just one loader
+        loader: 'babel-loader', // with 'loader' prop we can call just one loader
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"], // with 'use' prop we can call several loaders
+        use: ['style-loader', 'css-loader'], // with 'use' prop we can call several loaders
       }
     ]
   },
@@ -35,6 +38,19 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       '/': 'http://localhost:3001'
+    }
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: 'vendor',
+          name: 'vendor',
+          enforce: true,
+          chunks: 'all'
+        }
+      }
     }
   }
 }
