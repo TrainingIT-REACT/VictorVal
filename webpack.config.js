@@ -12,7 +12,8 @@ module.exports = {
   // mode: 'none',
   // mode: isDevel ? 'development' : 'production',
   output: {
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
+    filename: "[name].[chunkhash:8].js"
   },
   module: {
     rules: [
