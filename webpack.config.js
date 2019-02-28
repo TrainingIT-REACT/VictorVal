@@ -33,5 +33,8 @@ module.exports = {
   devServer: {
     contentBase: './build',
     historyApiFallback: true,
+    proxy: {
+      '/': 'http://localhost:3001'
+    }
   }
 }

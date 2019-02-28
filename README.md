@@ -1,5 +1,13 @@
 # Reactify
 
+## Notas sobre el ejercicio
+
+
+
+<br />
+<hr />
+<br />
+
 ## Plantilla para la Práctica final
 
 En esta plantilla encontrarás todo lo necesario para realizar la práctica final. La aplicación de React ha sido generada utilizando [create-react-app](https://github.com/facebook/create-react-app). Esto te servirá como comienzo en el desarrollo, aunque tendrás que desarrollar tu propia configuración cuando llegues al apartado 8.
