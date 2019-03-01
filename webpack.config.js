@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // mode through node env variable
 // const isDevel = process.env.NODE_ENV === 'development'
@@ -7,14 +8,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/index.js',
+    sw: './public/sw.js',
     vendor: ['react', 'react-dom', 'react-router-dom']
   },
   // mode: 'none',
   // mode: isDevel ? 'development' : 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
+    // filename: "[name].js",
     filename: "[name].[chunkhash:8].js",
     publicPath: "/",
+    globalObject: 'this',
   },
   module: {
     rules: [
@@ -33,7 +37,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: './index.html',
-    })
+    }),
+    new CopyPlugin([
+      {
+        from: 'public/sw.js',
+        to: '',
+        toType: 'file',
+      },
+    ]),
   ],
   devtool: "hidden-source-map",
   devServer: {
