@@ -56,13 +56,10 @@ class AlbumsPage extends Component {
 
   render() {
     return <>
-      <p>Albums</p>
       { this.renderAlbums() }
     </>
   }
 }
-
-// export default AlbumsPage;
 
 const mapStateToProps = (state/*, otherProps */) => ({
   albums: state.albums.albums,

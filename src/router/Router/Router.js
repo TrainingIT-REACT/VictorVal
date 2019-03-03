@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 
 // Componente para definir rutas privadas
@@ -16,19 +16,19 @@ import LoginPage from '../../containers/LoginPage';
 
 const AlbumPage = React.lazy(() => import('../../containers/AlbumPage'));
 const PlayerPage = React.lazy(() => import('../../containers/PlayerPage'));
+const UserPage = React.lazy(() => import('../../containers/UserPage'));
 
 
 class Router extends React.Component {
   constructor(props) {
     super(props);
 
-    // Bind de los métodos
-    this.updateUser = this.updateUser.bind(this);
-
     this.state = {
       signedIn: false,
       updateUser: this.updateUser,
     }
+
+    this.updateUser = this.updateUser.bind(this);
   }
 
   updateUser(signedIn) {
@@ -40,12 +40,15 @@ class Router extends React.Component {
       <BrowserRouter>
         <Layout>
           <React.Suspense fallback="Cargando...">
-            <Route path="/" exact component={AlbumsPage}/>
-            <Route path="/albums" exact component={AlbumsPage}/>
-            <Route path="/albums/:id" exact component={AlbumPage}/>
-            <Route path="/player" exact component={PlayerPage}/>
-            <Route path="/login" exact component={LoginPage}/>
-            {/* <PrivateRoute path="/admin" component={Admin}/> */}
+            <Switch>
+              <Route path="/" exact component={AlbumsPage}/>
+              <Route path="/albums" exact component={AlbumsPage}/>
+              <Route path="/albums/:id" exact component={AlbumPage}/>
+              <Route path="/player" exact component={PlayerPage}/>
+              <Route path="/login" exact component={LoginPage}/>
+              <PrivateRoute path="/profile" exact component={UserPage}/>
+              <Redirect to="/" />
+            </Switch>
           </React.Suspense>
         </Layout>
       </BrowserRouter>

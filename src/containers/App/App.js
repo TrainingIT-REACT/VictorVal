@@ -6,9 +6,9 @@ import Router from '../../router/Router';
 
 
 const App = () => (
-  <Provider store={store}>
-    <Router />
-  </Provider>
+    <Provider store={store}>
+      <Router />
+    </Provider>
 );
 
 export default App;
