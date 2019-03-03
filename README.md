@@ -1,24 +1,17 @@
 # Reactify
 
-## Notas sobre el ejercicio
+## Scripts
 
-Funcionalidades:
+**Entorno de desarrollo**
+* `npm run start`
+* `npm run server`
 
-* [ ] Mostrar varios listados con música recomendada, resultados de búsqueda y otra información.
-* [X] Incluir una barra de navegación lateral o en la zona superior para facilitar la navegación.
-* [X]  Incluye una vista de reproducción.
-   * [ ] La reproducción final de los audios es opcional, pero recomendada.
-* [X]  Incluir distintas vistas en el proyecto.
-* [X]  Almacenar en el store de Redux información relevante cómo el usuario.
-* [X]  Almacenar en el store de Redux el histórico de canciones escuchadas y álbumes visitados.
-* [X]  Almacenar en el store de Redux la información de las respuestas del servidor.
-* [X]  Desarrollar una configuración de webpack lista para producción
-* [X]  Configurar la aplicación como una PWA
+**Build**
+* `npm run build`
 
+**Tests**
+* `npm run test`
 
-<br />
-<hr />
-<br />
 
 ## Plantilla para la Práctica final
 
