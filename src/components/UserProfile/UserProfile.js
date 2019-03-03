@@ -30,8 +30,9 @@ const UserProfile = ({ classes, user }) => {
             <UserIcon />
           </Avatar>
         }
-        title={user.username}
-        subheader={'user@email.com'}
+        // title={user ? user.username : (<span className="usernameTitle">John Doe</span>)}
+        title={<span className="usernameLabel">{user ? user.username : 'John Doe'}</span>}
+        subheader={<span className="emailLabel">{user ? user.email : 'johndoe@email.com'}</span>}
       />
       <CardContent>
         {'TODO - user profile contents ...'}
