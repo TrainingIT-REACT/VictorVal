@@ -11,6 +11,11 @@ self.addEventListener('activate', (event) => {
   console.log("el nuevo service worker se ha activado")
 });
 
+self.addEventListener('message', (e) => {
+  if (e.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
+});
 
 // ----------------------------------------------------------------------------
 

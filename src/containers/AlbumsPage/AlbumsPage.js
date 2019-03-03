@@ -56,6 +56,7 @@ class AlbumsPage extends Component {
 
   render() {
     return <>
+      <p>Albums</p>
       { this.renderAlbums() }
     </>
   }
