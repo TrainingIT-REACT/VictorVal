@@ -15,8 +15,8 @@ module.exports = {
   // mode: isDevel ? 'development' : 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
-    // filename: "[name].js",
-    filename: "[name].[chunkhash:8].js",
+    filename: "[name].js",
+    // filename: "[name].[chunkhash:8].js",
     publicPath: "/",
     globalObject: 'this',
   },
